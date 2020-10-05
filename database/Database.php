@@ -7,7 +7,7 @@ class Database {
     private $dbservername = "localhost";
     private $dbusername = "root";
     private $dbpassword = "root";
-    private $dbname = "cst236";
+    private $dbname = "milestone";
     
     // Class constructor
     function __construct() {

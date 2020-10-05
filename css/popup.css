@@ -1,0 +1,4 @@
+.popup { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0,0,0,.5); align-items: center; justify-content: center; }
+.popup.show { display: flex; }
+.popup .wrapper { width: 480px; max-width: 100%; background-color: #fff; min-height: 480px; text-align: center; position: relative; padding: 16px; }
+.popup .close { top: 16px; right: 16px; position: absolute; text-decoration: none; background-color: #222; color: #fff; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; }
