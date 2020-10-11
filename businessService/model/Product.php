@@ -5,15 +5,33 @@ class Product {
     private $name;
     private $description;
     private $price;
+    private $file;
     
-    public function __construct($id, $name, $description, $price) {
+    public function __construct($id, $name, $description, $price, $file) {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
+        $this->file = $file;
     }
     
     
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
     /**
      * @return mixed
      */
@@ -43,7 +61,7 @@ class Product {
      */
     public function getPrice()
     {
-        return $this->price;
+        return floatval($this->price);
     }
 
     /**

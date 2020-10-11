@@ -1,5 +1,7 @@
 <?php
 
+require_once '../../header.php';
+
 echo '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>';
 echo '<script src="../../js/popup.js"></script>';
 ?>
@@ -23,7 +25,7 @@ echo '<script src="../../js/popup.js"></script>';
 			<label>Search for a product:</label><input type="text" name="name"></input><br>
 			<input type="submit" value="Search"></input>
 		</form>
-<table id="product" class="display">
+<table id="product">
 	<thead>
         <tr>
             <th>ID</tH>
@@ -37,7 +39,7 @@ echo '<script src="../../js/popup.js"></script>';
 <?php 
 for ($x = 0; $x < count($products); $x++){
     
-    echo '<tr class="row">';
+    echo '<tr class="group">';
     
     echo '<td>' . $products[$x]['ID'] . '</td>';
     echo '<td class="title">' . $products[$x]['PRODUCTNAME'] . '</td>';

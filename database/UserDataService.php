@@ -7,13 +7,48 @@ class UserDataService
     function __construct() {
         
     }
+
+    function showAll() {
+        $db = new Database();
+        
+        $connection = $db->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM users");
+        
+        if (!$stmt) {
+            echo "Something went wrong in the binding process. sql error?";
+            exit;
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if (!$result) {
+            echo "Assume the SQL statement has an error";
+            return null;
+            exit;
+        }
+
+        
+        if ($result->num_rows == 0) {
+            return null;
+        }
+        else {
+            $person_array = array();
+            
+            while ($person = $result->fetch_assoc()) {
+                array_push($person_array, $person);
+            }
+            
+            return $person_array;
+        }
+    }
     
     function findByFirstName($n) {
         // returns an array of persons
         $db = new Database();
         
         $connection = $db->getConnection();
-        $stmt = $connection->prepare("SELECT ID, FIRST_NAME, LAST_NAME FROM USERS WHERE FIRST_NAME LIKE ?");
+        $stmt = $connection->prepare("SELECT * FROM USERS WHERE FIRST_NAME LIKE ? LIMIT 1");
         
         if (!$stmt) {
             echo "Something went wrong in the binding process. sql error?";
@@ -82,12 +117,12 @@ class UserDataService
         }
     }
     
-    function findbyID($id) {
+    public function findbyID($id) {
         // returns an array of persons
         $db = new Database();
         
         $connection = $db->getConnection();
-        $stmt = $connection->prepare("SELECT ID, FIRST_NAME, LAST_NAME FROM USERS WHERE ID = $id LIMIT 1");
+        $stmt = $connection->prepare("SELECT * FROM USERS WHERE ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "Something went wrong in the binding process. sql error?";
@@ -114,7 +149,8 @@ class UserDataService
                 array_push($person_array, $person);
             }
             
-            return $person_array;
+            $p = new Person($person_array[0]['ID'], $person_array[0]['FIRST_NAME'], $person_array[0]['LAST_NAME'], $person_array[0]['USERNAME'], $person_array[0]['ROLE'], $person_array[0]['PASSWORD']);
+            return $p;
         }
     }
     
@@ -123,7 +159,7 @@ class UserDataService
         $db = new Database();
         
         $connection = $db->getConnection();
-        $stmt = $connection->prepare("DELETE FROM USERS WHERE ID = $id LIMIT 1");
+        $stmt = $connection->prepare("DELETE FROM USERS WHERE ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "Something went wrong in the binding process. sql error?";
@@ -144,7 +180,7 @@ class UserDataService
         // $id is the number to update. returns a true or false. $person is the item to change
         $db = new Database();
         $connection = $db->getConnection();
-        $stmt = $connection->prepare("UPDATE USERS SET FIRST_NAME = ?, LAST_NAME = ? WHERE ID = ? LIMIT 1");
+        $stmt = $connection->prepare("UPDATE USERS SET FIRST_NAME = ?, LAST_NAME = ?, ROLE = ?, PASSWORD = ? WHERE ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "Something went wrong in the binding process. sql error?";
@@ -153,10 +189,40 @@ class UserDataService
         
         $fn = $person->getFirst_name();
         $ln = $person->getLast_name();
+        $r = $person->getRole();
+        $pass = $person->getPassword();
         
-        $stmt->bind_param("ssi", $fn, $ln, $id);
+        $stmt->bind_param("ssisi", $fn, $ln, $r, $pass, $id);
         $stmt->execute();
         
+        if ($stmt->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function makeNew($person){
+        $db = new Database();
+        $connection = $db->getConnection();
+        $stmt = $connection->prepare('INSERT INTO users (FIRST_NAME, LAST_NAME, USERNAME, ROLE, PASSWORD) VALUES (?,?,?,?,?)');
+
+        if (!$stmt) {
+            echo "Something went wrong in the binding process. sql error?";
+            exit;
+        }
+
+        $fn = $person->getFirst_name();
+        $ln = $person->getLast_name();
+        $un = $person->getUsername();
+        $ro = $person->getRole();
+        $pa = $person->getPassword();
+
+        $stmt->bind_param("sssis", $fn, $ln, $un, $ro, $pa);
+        $stmt->execute();
+        
+        
+
         if ($stmt->affected_rows > 0) {
             return true;
         } else {

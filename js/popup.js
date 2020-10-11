@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var popup = $('.popup');
-    $('.row').on('click', function(e){
+    $('.group').on('click', function(e){
         var thumbnail = $(this).find('.thumbnail').attr('src');
         var title = $(this).find('.title').text();
         var price = $(this).find('.price').text();

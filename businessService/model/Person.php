@@ -7,13 +7,15 @@ class Person {
     private $last_name;
     private $username;
     private $role;
+    private $password;
     
-    public function __construct($id, $first_name, $last_name, $username, $role) {
+    public function __construct($id, $first_name, $last_name, $username, $role, $password) {
         $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->username = $username;
         $this->role = $role;
+        $this->password = $password;
     }
     
     /**
@@ -56,6 +58,11 @@ class Person {
         return $this->role;
     }
 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
     /**
      * @param mixed $id
      */
@@ -96,7 +103,10 @@ class Person {
         $this->role = $role;
     }
 
-    
+    public function setPassword()
+    {
+        $this->password = $password;
+    }
 }
 
 ?>
