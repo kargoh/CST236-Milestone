@@ -119,7 +119,7 @@ class ProductDataService
                 array_push($product_array, $product);
             }
             
-            $p = new Product($product_array[0]['ID'], $product_array[0]['PRODUCTNAME'], $product_array[0]['DESCRIPTION'], $product_array[0]['PRICE'], NULL);
+            $p = new Product($product_array[0]['ID'], $product_array[0]['PRODUCTNAME'], $product_array[0]['DESCRIPTION'], $product_array[0]['PRICE'], $product_array[0]['PHOTO']);
             return $p;
         }
     }

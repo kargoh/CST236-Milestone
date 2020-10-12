@@ -24,6 +24,6 @@ if ($bs->makeNew($user)) {
     echo "Nothing inserted.<br>"; 
 }
 
-echo '<a href="/">Return to main page</a>';
+echo '<a href="../views/login.html">Return to login</a>';
 
 ?>

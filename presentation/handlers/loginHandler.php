@@ -1,17 +1,23 @@
 <?php
 
-require_once 'Database.php';
+require_once '../../Autoloader.php';
+require_once '../../header.php';
 
 // Establish connection
 $db = new Database();
-$un = $_REQUEST['email'];
+$un = $_REQUEST['username'];
 $pw = $_REQUEST['password'];
 $conn = $db->getConnection();
 
+
 // Query for matching rows
-$sql_query = "SELECT email FROM users WHERE email = '" . $un . "' AND password ='" . $pw . "'";
+$sql_query = "SELECT USERNAME, ID FROM users WHERE USERNAME = '" . $un . "' AND password ='" . $pw . "'";
 $result = $conn->query($sql_query);
 $rows = array();
+
+$bs = new UserBusinessService;
+
+$u = $bs->findbyUsername($un);
 
 // Populate rows array
 while ($row = $result -> fetch_row()) {
@@ -20,10 +26,11 @@ while ($row = $result -> fetch_row()) {
 
 // Redirect to Index if matching row is returned
 if (count($rows) > 0) {
-    //$_SESSION['principal'] = true;
-    header("Location:index.php");
+    $_SESSION['principal'] = true;
+    $_SESSION['userid'] = $u;
+    header("Location:../../index.php");
 } else {
-    //$_SESSION['principal'] = false;
+    $_SESSION['principal'] = false;
 }
 
 ?>

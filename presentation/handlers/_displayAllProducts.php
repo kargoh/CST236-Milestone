@@ -26,6 +26,7 @@
 <th>Product Description</th>
 <th>Product Price</th>
 <th>Image</th>
+<th>Add to Cart</th>
 </tr>
 <?php 
 for ($x = 0; $x < count($products); $x++){
@@ -38,6 +39,7 @@ for ($x = 0; $x < count($products); $x++){
     echo '<td class="desc">' . $products[$x]['DESCRIPTION'] . '</td>';
     echo '<td class="price">' . $products[$x]['PRICE'] . '</td>';
     echo '<td><img class="thumbnail" src="' . $products[$x]['PHOTO'] . '"/></td>';
+    echo "<td><form action='../handlers/addToCart.php'><input type='hidden' name='id' value=" . $products[$x]['ID'] . "><input type='submit' value='Add to Cart'></form></td>";
     
     echo "</tr>";
 }

@@ -116,6 +116,42 @@ class UserDataService
             return $person_array;
         }
     }
+
+    function findByUsername($n) {
+        // returns an array of persons
+        $db = new Database();
+        
+        $connection = $db->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM USERS WHERE USERNAME LIKE ? LIMIT 1");
+        
+        if (!$stmt) {
+            echo "Something went wrong in the binding process. sql error?";
+            exit;
+        }
+        
+        $stmt->bind_param("s", $n);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if (!$result) {
+            echo "Assume the SQL statement has an error";
+            return null;
+            exit;
+        }
+        
+        if ($result->num_rows == 0) {
+            return null;
+        }
+        else {
+            $person_array = array();
+            
+            while ($person = $result->fetch_assoc()) {
+                array_push($person_array, $person);
+            }
+            
+            return $person_array;
+        }
+    }
     
     public function findbyID($id) {
         // returns an array of persons

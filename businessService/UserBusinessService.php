@@ -38,6 +38,15 @@ class UserBusinessService {
 
         return $persons;
     }
+
+    function findByUsername($n) {
+        $persons = Array();
+        
+        $dbService = new UserDataService();
+        $persons = $dbService->findByUsername($n);
+        
+        return $persons;
+    }
     
     public function findbyID($id) {
         $dbService = new UserDataService();

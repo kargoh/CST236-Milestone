@@ -33,6 +33,7 @@ echo '<script src="../../js/popup.js"></script>';
             <th>Description</th>
             <th>Price</th>
             <th>Image</th>
+            <th>Add to Cart</th>
         </tr>
     </thead>
     <tbody>
@@ -46,6 +47,7 @@ for ($x = 0; $x < count($products); $x++){
     echo '<td class="desc">' . $products[$x]['DESCRIPTION'] . '</td>';
     echo '<td class="price">' . $products[$x]['PRICE'] . '</td>';
     echo '<td><img class="thumbnail" src="' . $products[$x]['IMAGES'] . '"/></td>';
+    echo "<td><form action='addToCart.php'><input type='hidden' name='id' value=" . $products[$x]['ID'] . "><input type='submit' value='Add to Cart'></form></td>";
     
     echo "</tr>";
 }
