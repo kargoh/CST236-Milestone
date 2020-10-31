@@ -3,7 +3,7 @@
     class BankBusinessService {
 
         function transaction($transfer) {
-
+/*
             $db = new Database();
             $conn = $db->getConnection();
 
@@ -28,7 +28,7 @@
                 echo "rollback";
                 $conn->rollback();
             }
-
+*/
             
         }
 

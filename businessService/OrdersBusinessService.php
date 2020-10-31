@@ -11,6 +11,13 @@ class OrdersBusinessService {
         
     }
 
+    function getOrdersBetweenDates($date1, $date2) {
+        $dbService = new OrderDataService();
+        $orders = $dbService->getOrdersBetweenDates($date1, $date2);
+
+        return $orders;
+    }
+
     function makeNew($order, $conn) {
         $dbService = new OrderDataService();
         return $dbService->makeNew($product);

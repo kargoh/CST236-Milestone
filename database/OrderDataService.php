@@ -174,6 +174,42 @@ class OrderDataService {
         }
     }
 
+    function getOrdersBetweenDates($date1, $date2) {
+        $db = new Database();
+        $connection = $db->getConnection();
+
+        $stmt = $connection->prepare("SELECT * FROM orders WHERE 'DATE' BETWEEN $date1 AND $date2");
+
+        if (!$stmt) {
+            echo "Something went wrong in the binding process. sql error?";
+            exit;
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        var_dump($result); die;
+        if (!$result) {
+            echo "Assume the SQL statement has an error";
+            return null;
+            exit;
+        }
+
+        
+        if ($result->num_rows == 0) {
+            return null;
+        }
+        else {
+            $orders_array = array();
+            
+            while ($order = $result->fetch_assoc()) {
+                array_push($orders_array, $order);
+            }
+            
+            return $orders_array;
+        }
+    }
+
 }
 
 ?>
