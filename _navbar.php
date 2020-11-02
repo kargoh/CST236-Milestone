@@ -17,8 +17,9 @@
           Admin
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="http://localhost/CST-236/Milestone-Project/presentation/views/adminUsers.php">Users</a>
-          <a class="dropdown-item" href="http://localhost/CST-236/Milestone-Project/presentation/views/adminProducts.php">Products</a>
+          <a class="dropdown-item" href="http://localhost/CST-236/Milestone-Project/presentation/views/adminUsers.php">View Users</a>
+          <a class="dropdown-item" href="http://localhost/CST-236/Milestone-Project/presentation/views/adminProducts.php">View Products</a>
+          <a class="dropdown-item" href="http://localhost/CST-236/Milestone-Project/presentation/views/new-product-form.php">Add Product</a>
           <!-- <div class="dropdown-divider"></div> -->
           <!--<a class="dropdown-item" href="#">Something else here</a> -->
         </div>

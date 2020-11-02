@@ -46,7 +46,7 @@ for ($x = 0; $x < count($products); $x++){
     echo '<td class="title">' . $products[$x]['PRODUCTNAME'] . '</td>';
     echo '<td class="desc">' . $products[$x]['DESCRIPTION'] . '</td>';
     echo '<td class="price">' . $products[$x]['PRICE'] . '</td>';
-    echo '<td><img class="thumbnail" src="' . $products[$x]['IMAGES'] . '"/></td>';
+    echo '<td><img class="thumbnail" src="' . $products[$x]['PHOTO'] . '"/></td>';
     echo "<td><form action='addToCart.php'><input type='hidden' name='id' value=" . $products[$x]['ID'] . "><input type='submit' value='Add to Cart'></form></td>";
     
     echo "</tr>";
